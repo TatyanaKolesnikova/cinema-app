@@ -1,28 +1,27 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Row, Col, Card } from 'antd';
-import {map} from "rxjs";
+import { Link } from "react-router-dom";
+import { Card } from 'antd';
 
 const { Meta } = Card;
 
 const MainPage = ({ movies }) => {
-    console.log(movies);
     return (
-        <div>
-            <Row>
+        <div className="row-list-movies">
             {
                 movies.map(item => (
-                    <Col span={6} key={item._id}>
-                        <Card
-                            hoverable
-                            cover={<img alt="example" src={item.poster}/>}
-                        >
-                            <Meta title={item.title}/>
-                        </Card>
-                    </Col>
+                    <div  key={item.id} className="card-movie">
+                        <Link to={"/movie/" + item._id} >
+                            <Card
+                                hoverable
+                                cover={<img alt="example" src={item.poster}/>}
+                            >
+                                <Meta title={item.title}/>
+                            </Card>
+                        </Link>
+                    </div>
                 ))
             }
-            </Row>
         </div>
 
     );
