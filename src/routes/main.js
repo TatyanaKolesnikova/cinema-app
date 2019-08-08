@@ -6,8 +6,7 @@ import { Switch, Route } from "react-router-dom";
 import { Layout } from 'antd';
 import { getMovies } from '../actions';
 
-import { MainPageContainer } from '../container';
-import { MoviePageContainer } from '../container';
+import { MainPageContainer, MoviePageContainer } from '../container';
 
 const { Content } = Layout;
 
@@ -18,12 +17,14 @@ class Main extends React.Component{
     }
 
     render() {
+        const {isLoading} = this.props;
         return(
             <Content>
-                <Switch>
+                {!isLoading && <Switch>
                     <Route path={"/"} exact component={MainPageContainer} />
                     <Route path={"/movie/:id"} component={MoviePageContainer} />
                 </Switch>
+                }
             </Content>
         )
     }
@@ -31,4 +32,7 @@ class Main extends React.Component{
 const mapDispatchToProps = {
     getMovies: getMovies
 };
-export const MainContainer = connect(null, mapDispatchToProps)(Main)
+const mapStateToProps = (state) => ({
+    isLoading: state.loading.isLoading
+})
+export const MainContainer = connect(mapStateToProps, mapDispatchToProps)(Main)

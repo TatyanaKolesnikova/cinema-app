@@ -211,6 +211,43 @@ main{
   height: 100%;
   object-fit: cover;
 }
+h1{
+  font-size: 30px;
+  line-height: 34px;
+  margin: 0 0 30px;
+}
+.row{
+  display: flex;
+  margin: 0 -10px;
+  overflow: hidden;
+}
+.row .col-40{
+  width: 40%;
+  padding: 0 10px;
+}
+.row .col-60{
+  width: 60%;
+  padding: 0 10px;
+}
+.movie-img{
+  margin: 0 0 15px;
+}
+.movie-img img{
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.list-movie{
+  width: 100%;
+  margin: 0 0 40px;
+}
+.list-movie dt{
+  font-weight: bold;
+  margin: 0 0 10px;
+}
+.list-movie dd{
+  margin: 0 0 10px;
+}
 footer.ant-layout-footer{
   background: #001529;
   color:#fff;
