@@ -19,10 +19,8 @@ class MoviePage extends React.Component{
         const genre = movie.genre ? movie.genre.join(", ") : '';
 
 
-        console.log(movie.actors);
-        console.log(this.state.movie);
-        const {isLoading} = this.props;
-        console.log(isLoading);
+        console.log(!!actors);
+      
         return(
 
 
@@ -39,13 +37,12 @@ class MoviePage extends React.Component{
                             <dd>{genre}</dd>
                             <dt>Актеры</dt>
                             <dd>{actors}</dd>
+                            { actors ? (
+                                <dt>Актеры</dt>
+                            ) : ''
+                            }
                             <dt>Страна</dt>
                             <dd>{country}</dd>
-                                {/*{ actors.length ? (*/}
-                                {/*    <dt>Актеры</dt>*/}
-                                {/*) : ''*/}
-                                {/*}*/}
-                            <dt>Описание</dt>
                             <dd>{movie.description}</dd>
                             <dt>Трейлер</dt>
                             <dd>
