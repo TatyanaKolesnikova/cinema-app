@@ -5,7 +5,7 @@ import { Router } from "react-router-dom";
 
 import '../node_modules/antd/dist/antd.css';
 import './assets/style/index.css';
-import { App, Portal }  from './components';
+import { App }  from './components';
 import { store, history }  from './store';
 
 ReactDOM.render(
