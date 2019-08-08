@@ -218,7 +218,7 @@ h1{
 }
 .row{
   display: flex;
-  margin: 0 -10px;
+  margin: 0 -10px 20px;
   overflow: hidden;
 }
 .row .col-40{
@@ -247,6 +247,36 @@ h1{
 }
 .list-movie dd{
   margin: 0 0 10px;
+}
+.btn-buy{
+  width: 100%;
+  display: block;
+  padding: 0 10px;
+  font-size: 18px;
+  line-height: 40px;
+  background: #1976d2;
+  color:#fff;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  -webkit-transition: background 0.3s ease 0s;
+  -o-transition: background 0.3s ease 0s;
+  transition: background 0.3s ease 0s;
+}
+.btn-buy:hover{
+  background: #164da0;
+}
+#portal .modal{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 500px;
+  height:500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  transform: translate(-50%, -50%);
 }
 footer.ant-layout-footer{
   background: #001529;
