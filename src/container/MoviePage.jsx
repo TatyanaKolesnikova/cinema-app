@@ -1,8 +1,8 @@
-import React, { Component  } from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import ReactDom from "react-dom";
 
-class MoviePage extends React.Component{
+class MoviePage extends Component{
     state = {
         movie: {},
         isShow: false
@@ -16,8 +16,15 @@ class MoviePage extends React.Component{
         this.setState({
             movie: movie
         })
-
     }
+  // checkArray = (arr) => {
+  //       if(arr[arr.length - 1]){
+  //           return arr.join(", ");
+  //       }else{
+  //           return arr.join(", ").slice(0,-2);
+  //       }
+  //   };
+
     render() {
         const {movie} = this.state;
         const country = movie.country ? movie.country.join(", ") : '';
@@ -26,6 +33,7 @@ class MoviePage extends React.Component{
 
 
         console.log(!!actors);
+        console.log(movie.genre);
 
 
         return(
@@ -45,6 +53,7 @@ class MoviePage extends React.Component{
                     <div className="col-60">
                         <dl className="list-movie">
                             <dt>Жанр</dt>
+                            {/*<dd>{this.checkArray(movie.genre)}</dd>*/}
                             <dd>{genre}</dd>
                             <dt>Актеры</dt>
                             <dd>{actors}</dd>
@@ -54,6 +63,7 @@ class MoviePage extends React.Component{
                             }
                             <dt>Страна</dt>
                             <dd>{country}</dd>
+                            <dt>Описание фильма</dt>
                             <dd>{movie.description}</dd>
                             <dt>Трейлер</dt>
                             <dd>
@@ -86,24 +96,6 @@ class Modal extends React.Component{
         )
     }
 }
-// const MoviePage = (props) => {
-//
-//
-//
-//
-//
-//    console.log(movieID);
-//     console.log(props);
-//
-//     return (
-//         <div className="container">
-//
-//                     <div></div>
-//
-//         </div>
-//
-//     );
-// };
 
 const mapStateToProps = (state) => ({
     movies: state.data.movies,

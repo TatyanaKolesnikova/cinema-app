@@ -192,7 +192,10 @@ main{
   display: -o-flex;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+}
+.hold-input{
+  width: 100%;
+  margin: 0 0 20px;
 }
 .row-list-movies .card-movie{
   width: 18%;
@@ -282,3 +285,4 @@ footer.ant-layout-footer{
   background: #001529;
   color:#fff;
 }
+.ant-select-selection--single{width: 250px}
