@@ -15,7 +15,7 @@ export const BlockHeader = () => (
             className="nav"
         >
             <Menu.Item key="1"><Link to='/'>Главная</Link></Menu.Item>
-            <Menu.Item key="2"><Link to='/'>Расписание</Link></Menu.Item>
+            <Menu.Item key="2"><Link to='/schedule'>Расписание</Link></Menu.Item>
         </Menu>
     </Header>
 );

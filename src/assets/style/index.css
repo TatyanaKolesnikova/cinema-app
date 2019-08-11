@@ -286,3 +286,40 @@ footer.ant-layout-footer{
   color:#fff;
 }
 .ant-select-selection--single{width: 250px}
+.box-shedules .ant-tabs-nav .ant-tabs-tab{
+  padding: 12px 70px;
+}
+.box-shedules .ant-tabs-tabpane{
+  display: flex;
+  flex-wrap: wrap;
+}
+.box-shedules .col-20{
+  width: 20%;
+  padding: 0 15px;
+  margin: 0 0 25px;
+}
+.card-movie{
+  width: 100%;
+  overflow: hidden;
+}
+.card-movie .hold-img{
+  width: 100%;
+  height: 380px;
+  overflow: hidden;
+  background: #40a9ff;
+  margin: 0 0 15px;
+}
+.card-movie img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.card-movie  h3{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0 0 10px;
+}
+.card-movie p{
+  margin: 0 0 15px;
+}

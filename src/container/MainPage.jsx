@@ -1,15 +1,18 @@
 import React, {useState} from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { Card, Select } from 'antd';
+import { Card, Select, Spin, Icon } from 'antd';
 
 const { Meta } = Card;
 const { Option } = Select;
 
-const MainPage = ({ movies, genres }) => {
+const MainPage = ({ movies, genres, isLoading }) => {
     const [filterMovies, setFilterMovies] = useState([]);
     const [valueInput, setValueInput] = useState("");
     const [valueSelect, setValueSelect] = useState("");
+    if(isLoading){
+        return <Spin indicator={<Icon type="loading-3-quarters" style={{fontSize: 76}} spin />} />
+    }
     const getFilterMovies = (valueInput, valueSelect) => {
         return movies.reduce((acc, item) => {
             const hasValue = valueInput && valueSelect;
@@ -29,15 +32,14 @@ const MainPage = ({ movies, genres }) => {
     console.log(filterMovies);
     const handleChangeInput = (e) => {
         const {value} = e.target;
-        console.log(value, valueSelect);
         setValueInput(value);
         setFilterMovies(getFilterMovies(value, valueSelect));
     }
     const handleChangeSelect = (value) => {
-        console.log(valueInput, value);
         setValueSelect(value);
         setFilterMovies(getFilterMovies(valueInput, value));
     }
+
     return (
         <div className="row-list-movies">
             <div className="hold-input">
@@ -50,7 +52,7 @@ const MainPage = ({ movies, genres }) => {
             </div>
             {
                 filterMovies.length ? filterMovies.map(item => (
-                    <div key={item.id} className="card-movie">
+                    <div key={item._id} className="card-movie">
                         <Link to={"/movie/" + item._id} >
                             <Card
                                 hoverable
@@ -61,7 +63,7 @@ const MainPage = ({ movies, genres }) => {
                         </Link>
                     </div>
                 )) : movies.map(item => (
-                    <div key={item.id} className="card-movie">
+                    <div key={item._id} className="card-movie">
                         <Link to={"/movie/" + item._id} >
                             <Card
                                 hoverable
@@ -80,7 +82,8 @@ const MainPage = ({ movies, genres }) => {
 
 const mapStateToProps = (state) => ({
     movies: state.data.movies,
-    genres: state.data.genres
+    genres: state.data.genres,
+    isLoading: state.loading.isLoading
 });
 
 export const MainPageContainer = connect(mapStateToProps)(MainPage);

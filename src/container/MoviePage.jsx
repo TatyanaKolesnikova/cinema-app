@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import ReactDom from "react-dom";
+import {Icon, Spin} from "antd";
 
 class MoviePage extends Component{
     state = {
@@ -26,7 +27,7 @@ class MoviePage extends Component{
   //   };
 
     render() {
-        const {movie} = this.state;
+        const {movie, isLoading} = this.state;
         const country = movie.country ? movie.country.join(", ") : '';
         const actors = movie.actors ? movie.actors.join(", ") : '';
         const genre = movie.genre ? movie.genre.join(", ") : '';
@@ -35,6 +36,9 @@ class MoviePage extends Component{
         console.log(!!actors);
         console.log(movie.genre);
 
+        if(isLoading){
+            return <Spin indicator={<Icon type="loading-3-quarters" style={{fontSize: 76}} spin />} />
+        }
 
         return(
             <div className="container">
