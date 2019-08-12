@@ -196,6 +196,21 @@ main{
 .hold-input{
   width: 100%;
   margin: 0 0 20px;
+  display: flex;
+}
+.col-70{
+  width: 70%;
+}
+.col-30{
+  width: 30%;
+}
+.col-70 .ant-radio-wrapper{
+  width: 16%;
+  margin-bottom: 5px;
+}
+.ant-collapse{
+  width: 100%;
+  margin-bottom: 25px;
 }
 .row-list-movies .card-movie{
   width: 18%;
@@ -204,6 +219,10 @@ main{
 .row-list-movies .card-movie a{
   display: block;
   text-decoration: none;
+}
+.row-list-movies .card-movie a:hover,
+.row-list-movies .card-movie:hover{
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
 .row-list-movies .ant-card-cover{
   height: 350px;

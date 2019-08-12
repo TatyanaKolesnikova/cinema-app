@@ -1,8 +1,9 @@
 import React, {useState} from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { Card, Select, Spin, Icon } from 'antd';
+import { Card, Select, Spin, Icon, Radio, Collapse} from 'antd';
 
+const { Panel } = Collapse;
 const { Meta } = Card;
 const { Option } = Select;
 
@@ -10,6 +11,7 @@ const MainPage = ({ movies, genres, isLoading }) => {
     const [filterMovies, setFilterMovies] = useState([]);
     const [valueInput, setValueInput] = useState("");
     const [valueSelect, setValueSelect] = useState("");
+    console.log(genres);
     if(isLoading){
         return <Spin indicator={<Icon type="loading-3-quarters" style={{fontSize: 76}} spin />} />
     }
@@ -18,6 +20,7 @@ const MainPage = ({ movies, genres, isLoading }) => {
             const hasValue = valueInput && valueSelect;
             const hasGenre = item.genre && item.genre.length && item.genre.some(elem => elem.trim() === valueSelect);
             const hasTitle = item.title.toLowerCase().includes(valueInput.toLowerCase());
+
             if(hasValue && hasGenre && hasTitle){
                 acc.push(item);
             }else if (valueInput && !valueSelect && hasTitle){
@@ -32,24 +35,57 @@ const MainPage = ({ movies, genres, isLoading }) => {
     console.log(filterMovies);
     const handleChangeInput = (e) => {
         const {value} = e.target;
+
         setValueInput(value);
         setFilterMovies(getFilterMovies(value, valueSelect));
     }
-    const handleChangeSelect = (value) => {
+    const handleChangeSelect = (e) => {
+
+        const {value} = e.target;
+        console.log(value);
         setValueSelect(value);
         setFilterMovies(getFilterMovies(valueInput, value));
     }
+    const genExtra = () => (
+        <Icon
+            type="setting"
+            onClick={event => {
+                // If you don't want click extra trigger collapse, you can prevent this:
+                event.stopPropagation();
+            }}
+        />
+    );
 
     return (
         <div className="row-list-movies">
-            <div className="hold-input">
-                <Select onChange={handleChangeSelect} allowClear>
-                    {
-                        genres.map((item, i) => (<Option key={i} value={item}>{item}</Option>))
-                    }
-                </Select>
-                <input type="text" name="filter-name" onChange={handleChangeInput} value={valueInput} />
-            </div>
+            <Collapse
+                expandIconPosition='right'
+            >
+                <Panel header="Фильтрация фильмов" key="1" extra={genExtra()}>
+                    <div className="hold-input">
+                        <div className='col-70'>
+                            <h3>Поиск по жанрам </h3>
+                            <Radio.Group onChange={handleChangeSelect} defaultValue='0' >
+                                <Radio  key={genres.length + 1}  value='0'>Все</Radio>
+                                {
+                                    genres.map((item, i) => (<Radio  key={i}  value={item}>{item}</Radio>))
+                                }
+                            </Radio.Group>
+                        </div>
+                        <div className='col-30'>
+                            <h3>Поиск по названию</h3>
+                            <input type="text" name="filter-name" onChange={handleChangeInput} value={valueInput} />
+                        </div>
+                        {/*<Select onChange={handleChangeSelect} allowClear>*/}
+                        {/*    {*/}
+                        {/*        genres.map((item, i) => (<Option key={i} value={item}>{item}</Option>))*/}
+                        {/*    }*/}
+                        {/*</Select>*/}
+
+                    </div>
+                </Panel>
+            </Collapse>
+
             {
                 filterMovies.length ? filterMovies.map(item => (
                     <div key={item._id} className="card-movie">
