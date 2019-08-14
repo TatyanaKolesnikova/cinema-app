@@ -89,27 +89,26 @@ export class ModalContent extends React.Component{
                 <div className="modal-content">
                     {isLoading
                         ? <Spin indicator={<Icon type="loading-3-quarters" style={{fontSize: 76}} spin />} />
-                        : <div>
+                        : <div className="modal-block">
                             <h2>{session.movie.title}</h2>
                             <div className="block-info">
-                                <span>{session.room}</span>
-                                <div>{new Date(session.date).toLocaleTimeString().slice(0, -3)}</div>
+                                <div>Зал: <span className={`color-${session.room}`}>{session.room}</span></div>
+                                <div>Время: {new Date(session.date).toLocaleTimeString().slice(0, -3)}</div>
                             </div>
                             {user ?
                                 <div>
                                     <h3>{user.name} спасибо за покупку</h3>
-                                    <p>Ваш билет на ряд: {chosenPlace.row} и место:  {chosenPlace.place}
-                                    был выслан на указанный вами email {user.email} </p>
+                                    <p>Ваш билет {chosenPlace.row} ряд и {chosenPlace.place} место был выслан на указанный вами email {user.email} </p>
                                 </div>
                                 : <React.Fragment>
                                     <Places space={space} handleChosePlace={this.handleChosePlace}/>
                                     {
                                         chosenPlace &&
-                                        <div>
-                                            <div>
+                                        <div  className="box-chose">
+                                            <h3>
                                                 Вы выбрали ряд: {chosenPlace.row},
                                                 место:  {chosenPlace.place}
-                                            </div>
+                                            </h3>
                                             {
                                                 showForm
                                                     ? <Form handleSubmitForm={this.handleClickBy}/>
@@ -120,7 +119,7 @@ export class ModalContent extends React.Component{
                                     }
                                 </React.Fragment>
                             }
-                            <span className="btnclose" onClick={handleClickBuy} ><Icon type="close-square" /></span>
+                            <span className="btn-close" onClick={handleClickBuy} ><Icon type="close-square" /></span>
                         </div>
                     }
                 </div>

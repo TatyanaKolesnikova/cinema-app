@@ -17,10 +17,10 @@ export const Form = ( {handleSubmitForm} ) =>{
 
     return (
         <form>
-            <div>
+            <div className="hold-input">
                 <Input placeholder="Ввведите имя" value={name} name="name" onChange={handleChangeName} />
             </div>
-            <div>
+            <div className="hold-input">
                 <Input placeholder="Ввведите email" value={email} name="email" onChange={handleChangeEmail} />
             </div>
             <button className="btn-buy" disabled={!name && !email} onClick={handleClickBy}>Купить</button>

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import {Icon, Spin} from "antd";
+import { Link } from "react-router-dom";
 
 class MoviePage extends Component{
     state = {
@@ -11,7 +11,6 @@ class MoviePage extends Component{
         const { match, movies } = this.props;
         const movieID = match.params.id;
         const movie = movies.find(item => item._id === movieID);
-        console.log("movies", movies);
 
         this.setState({
             movie: movie
@@ -42,7 +41,7 @@ class MoviePage extends Component{
                                 src={movie.poster}
                                 alt={movie.title} />
                         </figure>
-                        <button className="btn-buy"  >Купить билет</button>
+                        <Link to='/schedule' className="btn-buy">Купить билет</Link>
                     </div>
                     <div className="col-60">
                         <dl className="list-movie">
