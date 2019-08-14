@@ -6,3 +6,4 @@ export * from "./Poster";
 export * from "./MovieSession";
 export * from "./Modal";
 export * from "./Places";
+export * from "./Form";

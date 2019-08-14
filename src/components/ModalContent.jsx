@@ -4,14 +4,18 @@ import {Icon, Spin} from "antd";
 
 import { URL_SPACE_SHADOW } from "../constants";
 import { getSortedPlaces, getRowsArray, getRandom } from "../utils";
-import { Places } from "./index";
+import { Places, Form } from "./index";
 
 
 export class ModalContent extends React.Component{
     state = {
         isLoading: true,
-        space: []
-    }
+        space: [],
+        chosenPlace: null,
+        showForm: false,
+        user: null
+    };
+
      componentDidMount() {
 
         axios.get(`${URL_SPACE_SHADOW}?session=${this.props.session._id}`)
@@ -66,10 +70,19 @@ export class ModalContent extends React.Component{
         })
     };
 
+    handleChosePlace = (data) => {
+        this.setState({chosenPlace: data})
+    }
+    handleClickOpenForm = () => {
+        this.setState({showForm: true})
+    }
+    handleClickBy = (data) => {
+        this.setState({user: data})
+    }
 
     render() {
-        const { isLoading, space } = this.state;
-        const { session } = this.props;
+        const { isLoading, space, chosenPlace, showForm, user } = this.state;
+        const { session , handleClickBuy } = this.props;
 
         return(
             <div className="modal-overlay">
@@ -82,7 +95,32 @@ export class ModalContent extends React.Component{
                                 <span>{session.room}</span>
                                 <div>{new Date(session.date).toLocaleTimeString().slice(0, -3)}</div>
                             </div>
-                            <Places space={space}/>
+                            {user ?
+                                <div>
+                                    <h3>{user.name} спасибо за покупку</h3>
+                                    <p>Ваш билет на ряд: {chosenPlace.row} и место:  {chosenPlace.place}
+                                    был выслан на указанный вами email {user.email} </p>
+                                </div>
+                                : <React.Fragment>
+                                    <Places space={space} handleChosePlace={this.handleChosePlace}/>
+                                    {
+                                        chosenPlace &&
+                                        <div>
+                                            <div>
+                                                Вы выбрали ряд: {chosenPlace.row},
+                                                место:  {chosenPlace.place}
+                                            </div>
+                                            {
+                                                showForm
+                                                    ? <Form handleSubmitForm={this.handleClickBy}/>
+                                                    : <div className="btn-buy" onClick={this.handleClickOpenForm}>Оформить билет</div>
+                                            }
+
+                                        </div>
+                                    }
+                                </React.Fragment>
+                            }
+                            <span className="btnclose" onClick={handleClickBuy} ><Icon type="close-square" /></span>
                         </div>
                     }
                 </div>

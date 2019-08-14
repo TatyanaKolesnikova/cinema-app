@@ -15,6 +15,7 @@ export class ModalBuy extends React.Component{
     }
 
     render() {
-        return ReactDom.createPortal(<ModalContent session={this.props.session}/>, this.root);
+        const { session, handleClickBuy } = this.props;
+        return ReactDom.createPortal(<ModalContent session={session} handleClickBuy={handleClickBuy}/>, this.root);
     }
 }

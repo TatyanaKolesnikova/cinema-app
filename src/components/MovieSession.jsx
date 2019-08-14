@@ -4,10 +4,9 @@ import {ModalBuy} from "./Modal";
 
 export const MovieSession = ({ session }) => {
     const [showModal, setShowModal] = useState(false);
-    console.log(showModal);
 
     const handleClickBuy = () => {
-        setShowModal(true);
+        setShowModal(!showModal);
     };
     return (
         <React.Fragment>
@@ -24,7 +23,7 @@ export const MovieSession = ({ session }) => {
                         <span>{session.room}</span>
                         <div>{new Date(session.date).toLocaleTimeString().slice(0, -3)}</div>
                         <div className="btn-buy" onClick={handleClickBuy} >Купить билет</div>
-                        {showModal && <ModalBuy session={session}/>}
+                        {showModal && <ModalBuy session={session} handleClickBuy={handleClickBuy}/>}
                     </div>
                 </div>
             </div>
