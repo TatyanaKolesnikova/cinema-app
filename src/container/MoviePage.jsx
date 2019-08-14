@@ -19,20 +19,18 @@ class MoviePage extends Component{
     }
   checkArray = (arr) => {
         if(arr[arr.length - 1]){
+            console.log('2222')
             return arr.join(", ");
         }else{
+            console.log('33333')
             return arr.join(", ").slice(0,-2);
         }
     };
 
     render() {
         const {movie} = this.state;
-        const country = movie.country ? movie.country.join(", ") : '';
-        const actors = movie.actors ? movie.actors.join(", ") : '';
-        const genre = movie.genre ? movie.genre.join(", ") : '';
 
-        //console.log(movie.actors)
-        //console.log("movie", movie.actors[movie.actors.length - 1]);
+        console.log("movie", typeof movie.actors);
 
         return(
             <div className="container">
@@ -51,14 +49,15 @@ class MoviePage extends Component{
                             <dt>Жанр</dt>
                             <dd>{movie.genre ? this.checkArray(movie.genre) : "" }</dd>
                             <dt>Актеры</dt>
-                            <dd>{movie.actors ? this.checkArray(movie.actors) : "" }</dd>
+                            <dd>{movie.actors ? this.checkArray(movie.actors) : "uuu" }</dd>
+
                             {/*{*/}
                             {/*    movie.actors ?*/}
                             {/*        <React.Fragment>*/}
                             {/*            <dt>Актеры</dt>*/}
                             {/*            <dd>{this.checkArray(movie.actors)}</dd>*/}
                             {/*        </React.Fragment>*/}
-                            {/*    : ""*/}
+                            {/*    : "uuu"*/}
                             {/*}*/}
                             <dt>Страна</dt>
                             <dd>{movie.country ? this.checkArray(movie.country) : "" }</dd>
