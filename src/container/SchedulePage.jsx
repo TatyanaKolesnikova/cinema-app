@@ -31,11 +31,6 @@ class SchedulePage extends React.Component{
     }
 
     render() {
-        const {isLoading} = this.props;
-
-        if(isLoading){
-            return <Spin indicator={<Icon type="loading-3-quarters" style={{fontSize: 76}} spin />} />
-        }
         return (
             <div className="box-shedules">
                 <Tabs defaultActiveKey="1" tabPosition='top' tabBarGutter={+4}>
@@ -56,7 +51,6 @@ const mapDispatchToProps = {
 }
 const mapStateToProps = (state) => ({
     sessions : state.data.sessions,
-    isLoading: state.loading.isLoading,
     movies: state.data.movies,
     rooms: state.data.rooms
 

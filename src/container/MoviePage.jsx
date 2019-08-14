@@ -12,32 +12,27 @@ class MoviePage extends Component{
         const movieID = match.params.id;
         const movie = movies.find(item => item._id === movieID);
         console.log("movies", movies);
-        console.log("movie", movie);
+
         this.setState({
             movie: movie
         })
     }
-  // checkArray = (arr) => {
-  //       if(arr[arr.length - 1]){
-  //           return arr.join(", ");
-  //       }else{
-  //           return arr.join(", ").slice(0,-2);
-  //       }
-  //   };
+  checkArray = (arr) => {
+        if(arr[arr.length - 1]){
+            return arr.join(", ");
+        }else{
+            return arr.join(", ").slice(0,-2);
+        }
+    };
 
     render() {
-        const {movie, isLoading} = this.state;
+        const {movie} = this.state;
         const country = movie.country ? movie.country.join(", ") : '';
         const actors = movie.actors ? movie.actors.join(", ") : '';
         const genre = movie.genre ? movie.genre.join(", ") : '';
 
-
-        console.log("aaa", this.props.movies);
-
-
-        if(isLoading){
-            return <Spin indicator={<Icon type="loading-3-quarters" style={{fontSize: 76}} spin />} />
-        }
+        //console.log(movie.actors)
+        //console.log("movie", movie.actors[movie.actors.length - 1]);
 
         return(
             <div className="container">
@@ -50,22 +45,23 @@ class MoviePage extends Component{
                                 alt={movie.title} />
                         </figure>
                         <button className="btn-buy"  >Купить билет</button>
-
-                        }
                     </div>
                     <div className="col-60">
                         <dl className="list-movie">
                             <dt>Жанр</dt>
-                            {/*<dd>{this.checkArray(movie.genre)}</dd>*/}
-                            <dd>{genre}</dd>
+                            <dd>{movie.genre ? this.checkArray(movie.genre) : "" }</dd>
                             <dt>Актеры</dt>
-                            <dd>{actors}</dd>
-                            { actors ? (
-                                <dt>Актеры</dt>
-                            ) : ''
-                            }
+                            <dd>{movie.actors ? this.checkArray(movie.actors) : "" }</dd>
+                            {/*{*/}
+                            {/*    movie.actors ?*/}
+                            {/*        <React.Fragment>*/}
+                            {/*            <dt>Актеры</dt>*/}
+                            {/*            <dd>{this.checkArray(movie.actors)}</dd>*/}
+                            {/*        </React.Fragment>*/}
+                            {/*    : ""*/}
+                            {/*}*/}
                             <dt>Страна</dt>
-                            <dd>{country}</dd>
+                            <dd>{movie.country ? this.checkArray(movie.country) : "" }</dd>
                             <dt>Описание фильма</dt>
                             <dd>{movie.description}</dd>
                             <dt>Трейлер</dt>
@@ -89,8 +85,7 @@ class MoviePage extends Component{
 
 
 const mapStateToProps = (state) => ({
-    movies: state.data.movies,
-    isLoading: state.loading.isLoading
+    movies: state.data.movies
 });
 
 export const MoviePageContainer = connect(mapStateToProps)(MoviePage);

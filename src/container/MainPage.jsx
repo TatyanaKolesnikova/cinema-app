@@ -1,20 +1,17 @@
 import React, {useState} from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { Card, Select, Spin, Icon, Radio, Collapse} from 'antd';
+import { Card, Select, Icon, Radio, Collapse} from 'antd';
 
 const { Panel } = Collapse;
 const { Meta } = Card;
 const { Option } = Select;
 
-const MainPage = ({ movies, genres, isLoading }) => {
+const MainPage = ({ movies, genres}) => {
     const [filterMovies, setFilterMovies] = useState([]);
     const [valueInput, setValueInput] = useState("");
     const [valueSelect, setValueSelect] = useState("");
 
-    if(isLoading){
-        return <Spin indicator={<Icon type="loading-3-quarters" style={{fontSize: 76}} spin />} />
-    }
     const getFilterMovies = (valueInput, valueSelect) => {
         return movies.reduce((acc, item) => {
             const hasValue = valueInput && valueSelect;
@@ -117,8 +114,7 @@ const MainPage = ({ movies, genres, isLoading }) => {
 
 const mapStateToProps = (state) => ({
     movies: state.data.movies,
-    genres: state.data.genres,
-    isLoading: state.loading.isLoading
+    genres: state.data.genres
 });
 
 export const MainPageContainer = connect(mapStateToProps)(MainPage);

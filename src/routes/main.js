@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Switch, Route } from "react-router-dom";
-import { Layout } from 'antd';
+import {Icon, Layout, Spin} from 'antd';
 
 import { getMovies } from '../actions';
 import { MainPageContainer, MoviePageContainer, SchedulePageContainer } from '../container';
@@ -15,6 +15,10 @@ class Main extends React.Component{
     }
 
     render() {
+        const { isLoading } = this.props;
+        if(isLoading){
+            return <Spin indicator={<Icon type="loading-3-quarters" style={{fontSize: 76}} spin />} />
+        }
         return(
             <Content>
                 <Switch>
@@ -29,5 +33,7 @@ class Main extends React.Component{
 const mapDispatchToProps = {
     getMovies: getMovies
 };
-
-export const MainContainer = connect(null, mapDispatchToProps)(Main)
+const mapStateToProps = (state) => ({
+    isLoading: state.loading.isLoading
+});
+export const MainContainer = connect(mapStateToProps, mapDispatchToProps)(Main);

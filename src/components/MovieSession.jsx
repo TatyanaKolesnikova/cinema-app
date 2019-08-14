@@ -8,11 +8,12 @@ export const MovieSession = ({ session }) => {
     const handleClickBuy = () => {
         setShowModal(!showModal);
     };
+    console.log(session);
     return (
         <React.Fragment>
             <div className="col-20">
                 <div className="card-movie">
-                    <Link to={"/movie/" + session._id} >
+                    <Link to={"/movie/" + session.movie._id} >
                         <div className="hold-img">
                             <img src={session.movie.poster} />
                         </div>
