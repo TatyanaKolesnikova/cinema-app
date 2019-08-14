@@ -1,10 +1,10 @@
 import React, {useState} from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import { Card, Icon, Radio, Collapse} from 'antd';
+import { Icon, Radio, Collapse} from 'antd';
+
+import { CardBlock } from "../components";
 
 const { Panel } = Collapse;
-const { Meta } = Card;
 
 const MainPage = ({ movies, genres}) => {
     const [filterMovies, setFilterMovies] = useState([]);
@@ -70,34 +70,14 @@ const MainPage = ({ movies, genres}) => {
                     </div>
                 </Panel>
             </Collapse>
-
             {
                 filterMovies.length ? filterMovies.map(item => (
-                    <div key={item._id} className="card-movie">
-                        <Link to={"/movie/" + item._id} >
-                            <Card
-                                hoverable
-                                cover={<img alt="example" src={item.poster}/>}
-                            >
-                                <Meta title={item.title}/>
-                            </Card>
-                        </Link>
-                    </div>
+                    <CardBlock id={item._id} title={item.title} poster={item.poster}/>
                 )) : movies.map(item => (
-                    <div key={item._id} className="card-movie">
-                        <Link to={"/movie/" + item._id} >
-                            <Card
-                                hoverable
-                                cover={<img alt="example" src={item.poster}/>}
-                            >
-                                <Meta title={item.title}/>
-                            </Card>
-                        </Link>
-                    </div>
+                    <CardBlock id={item._id} title={item.title} poster={item.poster}/>
                 ))
             }
         </div>
-
     );
 };
 

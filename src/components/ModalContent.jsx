@@ -6,7 +6,6 @@ import { URL_SPACE_SHADOW } from "../constants";
 import { getRowsArray, getSortedPlaces, getRandom } from "../utils";
 import { Places, Form } from "./index";
 
-
 export class ModalContent extends React.Component{
     state = {
         isLoading: true,
@@ -31,31 +30,27 @@ export class ModalContent extends React.Component{
 
     getPlaceArray = (arr) => {
         const sortByRow = getSortedPlaces(arr, "row");
-        const rows = getRowsArray(sortByRow);
-
-        // const rows = sortByRow.reduce((acc, elem) => {
-        //     if(!acc.length){
-        //         return [[elem]];
-        //     }
-        //     const hasSameRow = acc.some(rowArray => rowArray.some(obj => obj.row === elem.row));
-        //     if(hasSameRow){
-        //         return acc.map(rowArray => {
-        //             const hasSameRow = rowArray.some(obj => obj.row === elem.row);
-        //             if(hasSameRow){
-        //                 return [...rowArray, elem];
-        //             }
-        //             return rowArray;
-        //         });
-        //     }else{
-        //         return [...acc, [elem]];
-        //     }
-        // }, []);
-
+        //const rows = getRowsArray(sortByRow);
+        const rows = sortByRow.reduce((acc, elem) => {
+            if(!acc.length){
+                return [[elem]];
+            }
+            const hasSameRow = acc.some(rowArray => rowArray.some(obj => obj.row === elem.row));
+            if(hasSameRow){
+                return acc.map(rowArray => {
+                    const hasSameRow = rowArray.some(obj => obj.row === elem.row);
+                    if(hasSameRow){
+                        return [...rowArray, elem];
+                    }
+                    return rowArray;
+                });
+            }else{
+                return [...acc, [elem]];
+            }
+        }, []);
         const rowsSortedByPlace = rows.map(item => {
-            console.log(item);
             return getSortedPlaces(item, "place");
         });
-        console.log(rowsSortedByPlace);
 
         this.setState({space: rowsSortedByPlace.map((item) => {
                 const random = getRandom(2, 6);
@@ -74,13 +69,13 @@ export class ModalContent extends React.Component{
 
     handleChosePlace = (data) => {
         this.setState({chosenPlace: data})
-    }
+    };
     handleClickOpenForm = () => {
         this.setState({showForm: true})
-    }
+    };
     handleClickBy = (data) => {
         this.setState({user: data})
-    }
+    };
 
     render() {
         const { isLoading, space, chosenPlace, showForm, user } = this.state;
@@ -128,4 +123,4 @@ export class ModalContent extends React.Component{
             </div>
         )
     }
-}
+};

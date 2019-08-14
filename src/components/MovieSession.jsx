@@ -8,7 +8,7 @@ export const MovieSession = ({ session }) => {
     const handleClickBuy = () => {
         setShowModal(!showModal);
     };
-    console.log(session);
+
     return (
         <React.Fragment>
             <div className="col-20">

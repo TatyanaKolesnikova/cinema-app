@@ -1,18 +1,17 @@
 import React from "react";
 import { connect } from "react-redux";
+import {Tabs} from "antd";
 
 import { getSession } from "../actions";
 import { SessionBlock} from "../components";
 import {dateOptions} from "../constants";
-import {Tabs} from "antd";
 
 const { TabPane } = Tabs;
 
 class SchedulePage extends React.Component{
     state = {
         movie: {}
-    }
-
+    };
     componentDidMount() {
         this.props.getSession();
     }
@@ -28,7 +27,7 @@ class SchedulePage extends React.Component{
         return sessionArr.map(item => {
             return item.filter(elem => elem.movie)
         })
-    }
+    };
 
     render() {
         return (
@@ -48,7 +47,7 @@ class SchedulePage extends React.Component{
 }
 const mapDispatchToProps = {
     getSession : getSession
-}
+};
 const mapStateToProps = (state) => ({
     sessions : state.data.sessions,
     movies: state.data.movies,

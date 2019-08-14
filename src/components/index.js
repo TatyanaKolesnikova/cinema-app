@@ -8,3 +8,4 @@ export * from "./Modal";
 export * from "./Places";
 export * from "./Form";
 export * from "./InfoBlockMovie";
+export * from "./CardBlock";
