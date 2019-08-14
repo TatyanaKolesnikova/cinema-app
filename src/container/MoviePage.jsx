@@ -1,19 +1,18 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import ReactDom from "react-dom";
 import {Icon, Spin} from "antd";
 
 class MoviePage extends Component{
     state = {
-        movie: {},
-        isShow: false
+        movie: {}
     }
-    toggleShowModal = () => this.setState((prevState) => ({isShow: !prevState.isShow}));
+
     componentDidMount() {
         const { match, movies } = this.props;
         const movieID = match.params.id;
         const movie = movies.find(item => item._id === movieID);
-
+        console.log("movies", movies);
+        console.log("movie", movie);
         this.setState({
             movie: movie
         })
@@ -33,8 +32,8 @@ class MoviePage extends Component{
         const genre = movie.genre ? movie.genre.join(", ") : '';
 
 
-        console.log(!!actors);
-        console.log(movie.genre);
+        console.log("aaa", this.props.movies);
+
 
         if(isLoading){
             return <Spin indicator={<Icon type="loading-3-quarters" style={{fontSize: 76}} spin />} />
@@ -50,8 +49,8 @@ class MoviePage extends Component{
                                 src={movie.poster}
                                 alt={movie.title} />
                         </figure>
-                        <button className="btn-buy" onClick={this.toggleShowModal} >Купить билет</button>
-                        {this.state.isShow && <Modal hideModal={this.toggleShowModal}/>
+                        <button className="btn-buy"  >Купить билет</button>
+
                         }
                     </div>
                     <div className="col-60">
@@ -87,19 +86,7 @@ class MoviePage extends Component{
     }
 
 }
-class Modal extends React.Component{
-    render() {
-        return(
-            ReactDom.createPortal(
-                <div className="modal">
-                    <h1>kjfgh</h1>
-                    <button onClick={this.props.hideModal}> Hide</button>
-                </div>,
-                document.getElementById("portal")
-            )
-        )
-    }
-}
+
 
 const mapStateToProps = (state) => ({
     movies: state.data.movies,

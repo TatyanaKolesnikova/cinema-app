@@ -1,8 +1,8 @@
-import React from "react";
+import React, {useState} from "react";
 import { connect } from "react-redux";
 
 import { getSession } from "../actions";
-import { SessionBlock } from "../components";
+import { SessionBlock, ModalBuy } from "../components";
 import {dateOptions} from "../constants";
 import {Icon, Spin, Tabs} from "antd";
 
@@ -10,12 +10,10 @@ const { TabPane } = Tabs;
 
 class SchedulePage extends React.Component{
     state = {
-        movie: {},
-        isShow: false
+        movie: {}
     }
 
     componentDidMount() {
-
         this.props.getSession();
     }
     getSessions = () => {
@@ -40,7 +38,7 @@ class SchedulePage extends React.Component{
         }
         return (
             <div className="box-shedules">
-                <Tabs defaultActiveKey="1" tabPosition='top' tabBarGutter='4'>
+                <Tabs defaultActiveKey="1" tabPosition='top' tabBarGutter={+4}>
                     {
                         this.getSessions().map((item, i) => (
                             <TabPane tab={new Date(item[0].date).toLocaleString("ru", dateOptions)} key={i} activeKey='0'>

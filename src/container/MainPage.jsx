@@ -11,7 +11,7 @@ const MainPage = ({ movies, genres, isLoading }) => {
     const [filterMovies, setFilterMovies] = useState([]);
     const [valueInput, setValueInput] = useState("");
     const [valueSelect, setValueSelect] = useState("");
-    console.log(genres);
+
     if(isLoading){
         return <Spin indicator={<Icon type="loading-3-quarters" style={{fontSize: 76}} spin />} />
     }
@@ -29,22 +29,22 @@ const MainPage = ({ movies, genres, isLoading }) => {
                 acc.push(item);
             }
             return acc;
+
         }, []);
 
     }
     console.log(filterMovies);
     const handleChangeInput = (e) => {
         const {value} = e.target;
-
         setValueInput(value);
         setFilterMovies(getFilterMovies(value, valueSelect));
+        console.log(value, valueSelect);
     }
     const handleChangeSelect = (e) => {
-
         const {value} = e.target;
-        console.log(value);
         setValueSelect(value);
         setFilterMovies(getFilterMovies(valueInput, value));
+        console.log(!!value);
     }
     const genExtra = () => (
         <Icon
@@ -65,8 +65,8 @@ const MainPage = ({ movies, genres, isLoading }) => {
                     <div className="hold-input">
                         <div className='col-70'>
                             <h3>Поиск по жанрам </h3>
-                            <Radio.Group onChange={handleChangeSelect} defaultValue='0' >
-                                <Radio  key={genres.length + 1}  value='0'>Все</Radio>
+                            <Radio.Group onChange={handleChangeSelect} defaultValue={false} >
+                                <Radio  key={genres.length + 1}  value={false}>Все</Radio>
                                 {
                                     genres.map((item, i) => (<Radio  key={i}  value={item}>{item}</Radio>))
                                 }
@@ -81,7 +81,6 @@ const MainPage = ({ movies, genres, isLoading }) => {
                         {/*        genres.map((item, i) => (<Option key={i} value={item}>{item}</Option>))*/}
                         {/*    }*/}
                         {/*</Select>*/}
-
                     </div>
                 </Panel>
             </Collapse>
