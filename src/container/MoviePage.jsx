@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { InfoBlockMovie } from "../components";
 
 class MoviePage extends Component{
     state = {
         movie: {}
-    }
+    };
 
     componentDidMount() {
         const { match, movies } = this.props;
@@ -15,21 +16,20 @@ class MoviePage extends Component{
         this.setState({
             movie: movie
         })
-    }
-  checkArray = (arr) => {
+    };
+    checkArray = (arr) => {
         if(arr[arr.length - 1]){
-            console.log('2222')
             return arr.join(", ");
         }else{
-            console.log('33333')
             return arr.join(", ").slice(0,-2);
         }
     };
 
     render() {
         const {movie} = this.state;
-
-        console.log("movie", typeof movie.actors);
+        const genre = movie.genre ? this.checkArray(movie.genre) : "";
+        const actors = movie.actors ? this.checkArray(movie.actors) : "";
+        const country = movie.country ? this.checkArray(movie.country) : "";
 
         return(
             <div className="container">
@@ -45,42 +45,28 @@ class MoviePage extends Component{
                     </div>
                     <div className="col-60">
                         <dl className="list-movie">
-                            <dt>Жанр</dt>
-                            <dd>{movie.genre ? this.checkArray(movie.genre) : "" }</dd>
-                            <dt>Актеры</dt>
-                            <dd>{movie.actors ? this.checkArray(movie.actors) : "uuu" }</dd>
-
-                            {/*{*/}
-                            {/*    movie.actors ?*/}
-                            {/*        <React.Fragment>*/}
-                            {/*            <dt>Актеры</dt>*/}
-                            {/*            <dd>{this.checkArray(movie.actors)}</dd>*/}
-                            {/*        </React.Fragment>*/}
-                            {/*    : "uuu"*/}
-                            {/*}*/}
-                            <dt>Страна</dt>
-                            <dd>{movie.country ? this.checkArray(movie.country) : "" }</dd>
-                            <dt>Описание фильма</dt>
-                            <dd>{movie.description}</dd>
+                            {+genre !== 0 ? <InfoBlockMovie title={`Жанр`} content={genre} /> : ""}
+                            {+actors !== 0 ? <InfoBlockMovie title={`Актеры`} content={actors} /> : ""}
+                            {+country !== 0 ? <InfoBlockMovie title={`Страна`} content={country} /> : ""}
+                            <InfoBlockMovie title={`Описание фильма`} content={movie.description} />
                             <dt>Трейлер</dt>
                             <dd>
                                 <iframe
                                     width="100%"
                                     height="315"
                                     src={movie.trailer}
+                                    title="video"
                                     frameBorder="0"
                                     allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                                     allowFullScreen></iframe>
-                                </dd>
+                            </dd>
                         </dl>
                     </div>
                 </div>
             </div>
         )
     }
-
-}
-
+};
 
 const mapStateToProps = (state) => ({
     movies: state.data.movies

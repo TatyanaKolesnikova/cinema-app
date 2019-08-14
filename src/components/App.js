@@ -10,7 +10,7 @@ export const App = () => (
     <Layout className="layout">
       <BlockHeader/>
       <MainContainer/>
-      <Footer style={{ textAlign: 'center' }}>Kolesnikova Tatyna ©2019 Hillel IT School</Footer>
+      <Footer>Kolesnikova Tatyna © 2019 Hillel IT School</Footer>
     </Layout>
 
   );

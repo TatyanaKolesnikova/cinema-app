@@ -9,13 +9,13 @@ export class ModalBuy extends React.Component{
 
     componentDidMount() {
         this.body.appendChild(this.root);
-    }
+    };
     componentWillUnmount() {
         this.body.removeChild(this.root);
-    }
+    };
 
     render() {
         const { session, handleClickBuy } = this.props;
         return ReactDom.createPortal(<ModalContent session={session} handleClickBuy={handleClickBuy}/>, this.root);
     }
-}
+};

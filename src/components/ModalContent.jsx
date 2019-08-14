@@ -3,7 +3,7 @@ import axios from "axios";
 import {Icon, Spin} from "antd";
 
 import { URL_SPACE_SHADOW } from "../constants";
-import { getSortedPlaces, getRowsArray, getRandom } from "../utils";
+import { getRowsArray, getSortedPlaces, getRandom } from "../utils";
 import { Places, Form } from "./index";
 
 
@@ -17,43 +17,45 @@ export class ModalContent extends React.Component{
     };
 
      componentDidMount() {
-
         axios.get(`${URL_SPACE_SHADOW}?session=${this.props.session._id}`)
             .then(({data}) => {
-
                 this.setLoading();
                 this.getPlaceArray(data.space);
             })
             .catch((error) =>  {
                 this.setLoading();
             })
-    }
+     }
 
     setLoading = () => this.setState({isLoading:false});
 
     getPlaceArray = (arr) => {
         const sortByRow = getSortedPlaces(arr, "row");
-        //const rows = getRowsArray(sortByRow);
-        const rows = sortByRow.reduce((acc, elem) => {
-            if(!acc.length){
-                return [[elem]];
-            }
-            const hasSameRow = acc.some(rowArray => rowArray.some(obj => obj.row === elem.row));
-            if(hasSameRow){
-                return acc.map(rowArray => {
-                    const hasSameRow = rowArray.some(obj => obj.row === elem.row);
-                    if(hasSameRow){
-                        return [...rowArray, elem];
-                    }
-                    return rowArray;
-                });
-            }else{
-                return [...acc, [elem]];
-            }
-        }, []);
+        const rows = getRowsArray(sortByRow);
+
+        // const rows = sortByRow.reduce((acc, elem) => {
+        //     if(!acc.length){
+        //         return [[elem]];
+        //     }
+        //     const hasSameRow = acc.some(rowArray => rowArray.some(obj => obj.row === elem.row));
+        //     if(hasSameRow){
+        //         return acc.map(rowArray => {
+        //             const hasSameRow = rowArray.some(obj => obj.row === elem.row);
+        //             if(hasSameRow){
+        //                 return [...rowArray, elem];
+        //             }
+        //             return rowArray;
+        //         });
+        //     }else{
+        //         return [...acc, [elem]];
+        //     }
+        // }, []);
+
         const rowsSortedByPlace = rows.map(item => {
+            console.log(item);
             return getSortedPlaces(item, "place");
         });
+        console.log(rowsSortedByPlace);
 
         this.setState({space: rowsSortedByPlace.map((item) => {
                 const random = getRandom(2, 6);

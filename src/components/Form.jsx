@@ -6,14 +6,14 @@ export const Form = ( {handleSubmitForm} ) =>{
     const [email, setemail] = useState("");
     const handleChangeName = (e) => {
         setName(e.target.value);
-    }
+    };
     const handleChangeEmail= (e) => {
         setemail(e.target.value);
-    }
+    };
     const handleClickBy = (e) => {
         e.preventDefault();
         handleSubmitForm({name, email});
-    }
+    };
 
     return (
         <form>
@@ -26,4 +26,4 @@ export const Form = ( {handleSubmitForm} ) =>{
             <button className="btn-buy" disabled={!name && !email} onClick={handleClickBy}>Купить</button>
         </form>
     )
-}
+};

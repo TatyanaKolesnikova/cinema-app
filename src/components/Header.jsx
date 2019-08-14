@@ -7,7 +7,7 @@ const { Header } = Layout;
 
 export const BlockHeader = () => (
     <Header>
-        <Link to='/' className="logo"><img src={require('../assets/images/logo.png')} alt="image" /></Link>
+        <Link to='/' className="logo"><img src={require('../assets/images/logo.png')} alt="logo" /></Link>
         <Menu
             theme="dark"
             mode="horizontal"

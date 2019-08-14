@@ -15,7 +15,7 @@ export const MovieSession = ({ session }) => {
                 <div className="card-movie">
                     <Link to={"/movie/" + session.movie._id} >
                         <span className="hold-img">
-                            <img src={session.movie.poster} />
+                            <img src={session.movie.poster} alt="poster" />
                         </span>
                         <strong>{session.movie.title}</strong>
                     </Link>

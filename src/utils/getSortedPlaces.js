@@ -8,4 +8,4 @@ export const getSortedPlaces = (arr, field) => {
         }
         return  0;
     });
-}
+};

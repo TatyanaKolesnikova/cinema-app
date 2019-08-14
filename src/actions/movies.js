@@ -1,6 +1,5 @@
 import axios from "axios";
 import { URL_MOVIES, SET_MOVIES } from "../constants";
-import {data} from "../redusers/data";
 import { isLoading, failLoading } from "./general";
 
 

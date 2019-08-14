@@ -1,10 +1,10 @@
-import React, {useState} from "react";
+import React from "react";
 import { connect } from "react-redux";
 
 import { getSession } from "../actions";
-import { SessionBlock, ModalBuy } from "../components";
+import { SessionBlock} from "../components";
 import {dateOptions} from "../constants";
-import {Icon, Spin, Tabs} from "antd";
+import {Tabs} from "antd";
 
 const { TabPane } = Tabs;
 

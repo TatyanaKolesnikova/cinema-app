@@ -1,11 +1,10 @@
 import React, {useState} from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { Card, Select, Icon, Radio, Collapse} from 'antd';
+import { Card, Icon, Radio, Collapse} from 'antd';
 
 const { Panel } = Collapse;
 const { Meta } = Card;
-const { Option } = Select;
 
 const MainPage = ({ movies, genres}) => {
     const [filterMovies, setFilterMovies] = useState([]);
@@ -26,7 +25,6 @@ const MainPage = ({ movies, genres}) => {
                 acc.push(item);
             }
             return acc;
-
         }, []);
     };
     const handleChangeInput = (e) => {
@@ -44,7 +42,6 @@ const MainPage = ({ movies, genres}) => {
         <Icon
             type="setting"
             onClick={event => {
-                // If you don't want click extra trigger collapse, you can prevent this:
                 event.stopPropagation();
             }}
         />
