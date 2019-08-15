@@ -363,6 +363,7 @@ footer.ant-layout-footer{
   object-fit: cover;
 }
 .card-movie strong{
+  display: block;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
